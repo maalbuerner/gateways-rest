@@ -1,15 +1,13 @@
 'use strict'
 
-var appErrors = require('../models/errors');
-var model = require('../models/app.model');
-var deviceModel = model.deviceModel;
-
+var appErrors = require('../services/errors');
+var deviceService = require('../services/devices.service');
 
 function getDevice(req, res)
 {
 	var id = req.params.id;
 
-	deviceModel.getById(id, (err, data) =>{
+	deviceService.getById(id, (err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: 'Request error'})
@@ -30,7 +28,7 @@ function getDevice(req, res)
 
 function getDevices(req, res)
 {
-	deviceModel.getAll((err, data) =>{
+	deviceService.getAll((err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: 'Request error'})
@@ -54,7 +52,7 @@ function saveDevice(req, res)
 {
 	var device = req.body;
 
-	deviceModel.insert(device, (err, data) =>{
+	deviceService.insert(device, (err, data) =>{
 		if(err)
 		{
 			var detail = '';
@@ -87,7 +85,7 @@ function setDevice(req, res)
 
 	var device = req.body;
 
-	deviceModel.update(id, device, (err, data) =>{
+	deviceService.update(id, device, (err, data) =>{
 		if(err)
 		{
 			var detail = '';
@@ -118,7 +116,7 @@ function deleteDevice(req, res)
 {
 	var id = req.params.id;
 
-	deviceModel.deleteById(id, (err, data) =>{
+	deviceService.deleteById(id, (err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: 'Request error.'});

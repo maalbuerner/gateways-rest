@@ -1,14 +1,13 @@
 'use strict'
 
-var appErrors = require('../models/errors');
-var model = require('../models/app.model');
-var gatewayModel = model.gatewayModel;
+var appErrors = require('../services/errors');
+var gatewayService = require('../services/gateways.service');
 
 function getGateway(req, res)
 {
 	var id = req.params.id;
 
-	gatewayModel.getById(id, (err, data) =>{
+	gatewayService.getById(id, (err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: 'Request error'})
@@ -29,7 +28,7 @@ function getGateway(req, res)
 
 function getGateways(req, res)
 {
-	gatewayModel.getAll((err, data) =>{
+	gatewayService.getAll((err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: 'Request error'})
@@ -54,7 +53,7 @@ function getGatewayDevices(req, res)
 {
 	var id = req.params.id;
 
-	gatewayModel.getDevices(id, (err, data) =>{
+	gatewayService.getDevices(id, (err, data) =>{
 		if(err)
 		{
 			var detail = '';
@@ -83,7 +82,7 @@ function saveGateway(req, res)
 {
 	var gateway = req.body;
 
-	gatewayModel.insert(gateway, (err, data) =>{
+	gatewayService.insert(gateway, (err, data) =>{
 		if(err)
 		{
 			var detail = '';
@@ -115,7 +114,7 @@ function setGateway(req, res)
 
 	var gateway = req.body;
 
-	gatewayModel.update(id, gateway, (err, data) =>{
+	gatewayService.update(id, gateway, (err, data) =>{
 		if(err)
 		{
 			var detail = '';
@@ -145,7 +144,7 @@ function deleteGateway(req, res)
 {
 	var id = req.params.id;
 
-	gatewayModel.deleteById(id, (err, data) =>{
+	gatewayService.deleteById(id, (err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: "Request error."})

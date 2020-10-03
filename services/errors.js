@@ -1,3 +1,5 @@
+'use strict'
+
 const errors = {
 	OK : 0,
 	REQUEST_ERROR : 1,
