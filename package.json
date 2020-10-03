@@ -1,7 +1,7 @@
 {
-  "name": "api-restfull-albums",
+  "name": "gateways-rest",
   "version": "1.0.0",
-  "description": "Proyecto apu rest para aplicacion angular de albums",
+  "description": "Api Rest for managing gateways - master devices that control multiple peripheral devices",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -14,9 +14,6 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "connect-multiparty": "^2.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.19",
-    "mysql": "^2.18.1"
+    "express": "^4.17.1"
   }
 }
