@@ -51,10 +51,22 @@ class Gateway
 		})[0];	
 	}
 
-	getById(id)
+	getById(id, callback)
 	{
 		var gateway = this.getByIdAux(id);
 		callback(appErrors.OK, gateway);
+	}
+
+	getDevices(id, callback)
+	{
+		var gatewayTmp = this.getByIdAux(id);
+
+		if(gatewayTmp)
+		{
+			var devices = this.getByIdAux(id).devices();
+			callback(appErrors.OK, devices);
+		}
+		else callback(appErrors.GATEWAY_NOT_FOUND_ERROR, null);
 	}
 
 	isAddressFormat(address)
@@ -83,7 +95,7 @@ class Gateway
 
 	update(id, gateway, callback)
 	{
-		var old_gateway = this.getById(id);
+		var old_gateway = this.getByIdAux(id);
 
 		if(old_gateway){
 			if(gateway.serial && gateway.name && gateway.address)

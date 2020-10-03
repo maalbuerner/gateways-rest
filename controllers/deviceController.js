@@ -104,7 +104,7 @@ function setDevice(req, res)
 		{
 			if(!data)
 			{
-				res.status(404).send({message: 'Device do not updated correctly.'});
+				res.status(404).send({message: 'Device not found.'});
 			}
 			else
 			{

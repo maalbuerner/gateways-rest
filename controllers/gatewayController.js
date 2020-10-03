@@ -6,9 +6,9 @@ var gatewayModel = model.gatewayModel;
 
 function getGateway(req, res)
 {
-	var serial = req.params.serial;
+	var id = req.params.id;
 
-	gatewayModel.getBySerial(serial, (err, data) =>{
+	gatewayModel.getById(id, (err, data) =>{
 		if(err)
 		{
 			res.status(500).send({message: 'Request error'})
@@ -46,6 +46,36 @@ function getGateways(req, res)
 			}
 		}
 
+	});
+}
+
+
+function getGatewayDevices(req, res)
+{
+	var id = req.params.id;
+
+	gatewayModel.getDevices(id, (err, data) =>{
+		if(err)
+		{
+			var detail = '';
+
+			if(err == appErrors.GATEWAY_NOT_FOUND_ERROR)
+				detail += ' Gateway with Id '+ id +
+				' not found.';
+
+			res.status(500).send({message: `Request error.${detail}`});
+		}
+		else
+		{
+			if(!data)
+			{
+				res.status(404).send({message: 'Devices not found.'});
+			}
+			else
+			{
+				res.status(200).send(data);
+			}
+		}
 	});
 }
 
@@ -137,6 +167,7 @@ function deleteGateway(req, res)
 module.exports = {
 	getGateways,
 	getGateway,
+	getGatewayDevices,
 	saveGateway,
 	setGateway,
 	deleteGateway
