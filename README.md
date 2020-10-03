@@ -3,7 +3,7 @@ A sample project for managing gateways - master devices that control multiple pe
 
 ## Download & Build on local
 
-## From github 
+## From gitlab 
 ### Clone the repository, install node packages and verify routes locally
 
 ``` 
