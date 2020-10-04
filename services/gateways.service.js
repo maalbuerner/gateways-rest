@@ -63,7 +63,7 @@ class Gateway
 				if(this.isAddressFormat(gateway.address)){
 					callback(appErrors.OK, model.addGateway(gateway));
 				}
-				else callback(appErrors.ADDRESS_FORMAT_ERROR, newGateway);
+				else callback(appErrors.ADDRESS_FORMAT_ERROR, null);
 			}
 			else callback(appErrors.REQUEST_ERROR, null);
 		}

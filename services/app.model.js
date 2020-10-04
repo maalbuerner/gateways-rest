@@ -4,10 +4,10 @@ var devicesIndex = 1;
 var gatewaysIndex = 1;
 
 var devices = [
-	{id: devicesIndex++, uid: 234, vendor:"INTEL", created_at:"2020/10/02", status: true, gateway: 1},
-	{id: devicesIndex++, uid: 3242, vendor:"INTEL", created_at:"2020/10/01", status: true, gateway: 1},
-	{id: devicesIndex++, uid: 68, vendor:"INTEL", created_at:"2020/10/01", status: true, gateway: 2},
-	{id: devicesIndex++, uid: 33, vendor:"INTEL", created_at:"2020/10/01", status: true, gateway: 1}
+	{id: devicesIndex++, uid: 234, vendor:"INTEL", created_at: new Date(), status: true, gateway: 1},
+	{id: devicesIndex++, uid: 3242, vendor:"INTEL", created_at: new Date(), status: true, gateway: 1},
+	{id: devicesIndex++, uid: 68, vendor:"INTEL", created_at: new Date(), status: true, gateway: 2},
+	{id: devicesIndex++, uid: 33, vendor:"INTEL", created_at: new Date(), status: true, gateway: 1}
 ];
 
 function devicesByGateway()
@@ -16,9 +16,9 @@ function devicesByGateway()
 }
 
 var gateways = [
-	{id: gatewaysIndex++, serial: "78945612378", name: "mygateway", address: "127.0.0.1", devices: devicesByGateway},
-	{id: gatewaysIndex++, serial: "32165498732", name: "gateway1", address: "127.0.0.1", devices: devicesByGateway},
-	{id: gatewaysIndex++, serial: "65432198765", name: "gateway2", address: "127.0.0.1", devices: devicesByGateway},
+	{id: gatewaysIndex++, serial: "78945612378", name: "gateway1", address: "127.0.0.1", devices: devicesByGateway},
+	{id: gatewaysIndex++, serial: "32165498732", name: "gateway2", address: "127.0.0.1", devices: devicesByGateway},
+	{id: gatewaysIndex++, serial: "65432198765", name: "gateway3", address: "127.0.0.1", devices: devicesByGateway},
 ];
 
 function addGateway(gateway)
@@ -38,9 +38,21 @@ function addDevice(device)
 	return newDevice;
 }
 
+function clearGateways()
+{
+	gateways = [];
+}
+
+function clearDevices()
+{
+	devices = [];
+}
+
 module.exports = {
 	devices: devices,
 	gateways: gateways,
 	addGateway,
-	addDevice
+	addDevice,
+	clearGateways,
+	clearDevices
 };

@@ -18,3 +18,6 @@ Open your local browser and try accessing
 `http://localhost:3268/api/gateways/`   
 `http://localhost:3268/api/gateways/1`   
 `http://localhost:3268/api/gateways/1/devices/`   
+
+## Running unit tests
+Run `ng test` to execute the unit tests via [Mocha](https://mochajs.org/).
