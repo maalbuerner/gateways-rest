@@ -16,7 +16,7 @@ var device_routes = require('./routes/deviceRoutes');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-// configuracion de cabeceras
+// headers configuration
 app.use((req, res, next)=>{
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method');
@@ -25,8 +25,7 @@ app.use((req, res, next)=>{
 	next();
 });
 
-
-// rutas base
+// Base routes
 app.use('/api', gateway_routes);
 app.use('/api', device_routes);
 
