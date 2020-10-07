@@ -2,6 +2,7 @@
 
 var appErrors = require('../services/errors');
 var gatewayService = require('../services/gateways.service');
+var deviceService = require('../services/devices.service');
 
 function getGateway(req, res)
 {
@@ -51,18 +52,12 @@ function getGateways(req, res)
 
 function getGatewayDevices(req, res)
 {
-	var id = req.params.id;
+	var serial = req.params.serial;
 
-	gatewayService.getDevices(id, (err, data) =>{
+	deviceService.getDevicesByGateway(serial, (err, data) =>{
 		if(err)
 		{
-			var detail = '';
-
-			if(err == appErrors.GATEWAY_NOT_FOUND_ERROR)
-				detail += ' Gateway with Id '+ id +
-				' not found.';
-
-			res.status(500).send({message: `Request error.${detail}`});
+			res.status(500).send({message: 'Request error.'});
 		}
 		else
 		{

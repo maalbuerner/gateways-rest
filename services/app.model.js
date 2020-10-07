@@ -4,35 +4,34 @@ var devicesIndex = 1;
 var gatewaysIndex = 1;
 
 var devices = [
-	{id: devicesIndex++, uid: 234, vendor:"INTEL", created_at: new Date(), status: true, gateway: 1},
-	{id: devicesIndex++, uid: 3242, vendor:"INTEL", created_at: new Date(), status: true, gateway: 1},
-	{id: devicesIndex++, uid: 68, vendor:"INTEL", created_at: new Date(), status: true, gateway: 2},
-	{id: devicesIndex++, uid: 33, vendor:"INTEL", created_at: new Date(), status: true, gateway: 1}
+	{id: devicesIndex++, uid: 234, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: true, gateway: 78945612378},
+	{id: devicesIndex++, uid: 3242, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: false, gateway: 78945612378},
+	{id: devicesIndex++, uid: 68, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: true, gateway: 32165498732},
+	{id: devicesIndex++, uid: 69, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: true, gateway: 32165498732},
+	{id: devicesIndex++, uid: 70, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: false, gateway: 32165498732},
+	{id: devicesIndex++, uid: 683, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: true, gateway: 32165498732},
+	{id: devicesIndex++, uid: 468, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: true, gateway: 32165498732},
+	{id: devicesIndex++, uid: 668, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: false, gateway: 32165498732},
+	{id: devicesIndex++, uid: 768, vendor:"INTEL", created_at: (new Date()).toISOString().split('T')[0], status: true, gateway: 32165498732},
 ];
 
-function devicesByGateway()
-{
-	return devices.filter((dev)=> {return dev.gateway == this.id});
-}
-
 var gateways = [
-	{id: gatewaysIndex++, serial: "78945612378", name: "gateway1", address: "127.0.0.1", devices: devicesByGateway},
-	{id: gatewaysIndex++, serial: "32165498732", name: "gateway2", address: "127.0.0.1", devices: devicesByGateway},
-	{id: gatewaysIndex++, serial: "65432198765", name: "gateway3", address: "127.0.0.1", devices: devicesByGateway},
+	{serial: "78945612378", name: "gateway1", address: "127.0.0.1"},
+	{serial: "32165498732", name: "gateway2", address: "127.0.0.1"},
+	{serial: "65432198765", name: "gateway3", address: "127.0.0.1"}
 ];
 
 function addGateway(gateway)
 {
-	var newGateway = Object.assign({}, {id: gatewaysIndex++}, gateway, 
-		{ devices: devicesByGateway });
-	gateways.push(newGateway);
-
-	return newGateway;
+	gateways.push(gateway);
+	return gateway;
 }
 
 function addDevice(device)
 {
-	var newDevice = Object.assign({}, {id: devicesIndex++}, device);
+	var newDevice = device;
+	newDevice.id = devicesIndex++;
+	newDevice.status = (device.status == 1 || device.status == 'true')? true : false; 
 	devices.push(newDevice);
 
 	return newDevice;
@@ -40,12 +39,12 @@ function addDevice(device)
 
 function clearGateways()
 {
-	gateways = [];
+	gateways.length = 0;	
 }
 
 function clearDevices()
 {
-	devices = [];
+	devices.length = 0;
 }
 
 module.exports = {

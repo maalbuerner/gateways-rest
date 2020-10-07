@@ -55,48 +55,15 @@ function saveDevice(req, res)
 	deviceService.insert(device, (err, data) =>{
 		if(err)
 		{
-			var detail = '';
+			var errorMessage = '';
 
 			if(err == appErrors.DEVICES_OVERFLOW_ERROR)
-				detail += ` Gateway with Id number '${device.gateway}', already have 10 associated devices.`;
+				errorMessage = `Gateway with serial number '${device.gateway}', already have 10 associated devices.`;
 			else if(err == appErrors.GATEWAY_NOT_FOUND_ERROR)
-				detail += ' Gateway with Id '+ device.gateway +
+				errorMessage = 'Gateway with serial '+ device.gateway +
 				' not found.';
 
-			res.status(500).send({message: `Request error.${detail}`});
-		}
-		else
-		{
-			if(!data)
-			{
-				res.status(404).send({message: 'Device not found.'});
-			}
-			else
-			{
-				res.status(200).send(data);
-			}
-		}
-	});
-}
-
-function setDevice(req, res)
-{
-	var id = req.params.id;
-
-	var device = req.body;
-
-	deviceService.update(id, device, (err, data) =>{
-		if(err)
-		{
-			var detail = '';
-
-			if(err == appErrors.DEVICES_OVERFLOW_ERROR)
-				detail += ` Gateway with Id number '${device.gateway}', already have 10 associated devices.`;
-			else if(err == appErrors.GATEWAY_NOT_FOUND_ERROR)
-				detail += ' Gateway with Id '+ device.gateway +
-				' not found.';
-
-			res.status(500).send({message: `Request error.${detail}`});
+			res.status(500).send({message: errorMessage});
 		}
 		else
 		{
@@ -135,10 +102,32 @@ function deleteDevice(req, res)
 	});
 }
 
+function getGatewayDevices(req, res)
+{
+	var gateway = req.params.serial;
+
+	deviceService.getDevicesByGateway(gateway, (err, data) =>{
+		if(err)
+		{
+			res.status(500).send({message: 'Request error'})
+		}
+		else
+		{
+			if(!data)
+			{
+				res.status(404).send({message: 'Device not found.'});
+			}
+			else
+			{
+				res.status(200).send(data);
+			}
+		}
+	});
+}
+
 module.exports = {
 	getDevices,
 	getDevice,
 	saveDevice,
-	setDevice,
 	deleteDevice
 };

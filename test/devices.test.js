@@ -25,7 +25,7 @@ describe('Adding device', () => {
 				vendor:"INTEL", 
 				created_at: new Date(), 
 				status: true, 
-				gateway: 2})
+				gateway: 78945612378})
 			.end((err, res) => {
 				res.should.have.status(200);
 				res.body.should.be.a('object');
